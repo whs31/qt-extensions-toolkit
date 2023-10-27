@@ -58,17 +58,16 @@ namespace QtEx
     Qt::String style;
   };
 
-  template <typename T>
-  using error_if_not_derived_from_qcoreapplication = std::enable_if_t<std::is_base_of<QCoreApplication, T>::value, bool>;
-
-  template <typename T, error_if_not_derived_from_qcoreapplication<T> = true>
+  template <typename T, typename U,
+            std::enable_if_t<std::is_base_of<QCoreApplication, T>::value, bool> = true,
+            std::enable_if_t<std::is_base_of<ApplicationBase, U>::value, bool> = true>
   class ApplicationLauncher
   {
     public:
-      explicit ApplicationLauncher(int argc, char** argv, ApplicationBase* base)
+      explicit ApplicationLauncher(int argc, char** argv)
         : m_argc(argc)
         , m_argv(argv)
-        , m_base(base)
+        , m_base(std::make_unique<U>())
         , m_project_info(ProjectInfo())
         , m_quick_parameters(QuickParameters())
         , m_icon_path(Qt::String())
@@ -76,7 +75,7 @@ namespace QtEx
         , m_free_console(false)
       {}
 
-      [[nodiscard]] ApplicationBase* base() const { return m_base; }
+      [[nodiscard]] ApplicationBase* base() const { return m_base.get(); }
       [[nodiscard]] int argc() const { return m_argc; }
       [[nodiscard]] char** argv() const { return m_argv; }
 
@@ -95,7 +94,7 @@ namespace QtEx
       [[nodiscard]] bool freeConsole() const { return m_free_console; }
       void setFreeConsole(bool x) { m_free_console = x; }
 
-      void launch() noexcept
+      int launch() noexcept
       {
         using Qtx::Log;
 
@@ -126,25 +125,26 @@ namespace QtEx
           Log::linebreak();
         }
 
-        const QUrl qml_entry(quickParameters().entry);
+        const QUrl QML_ENTRY(quickParameters().entry);
         QQuickStyle::setStyle(quickParameters().style);
 
         base()->start();
 
-        QQmlEngine engine;
-        Qt::Object::connect(&engine, &QQmlEngine::quit, qApp, &QCoreApplication::quit);
-
-        QQmlComponent component(&engine);
+        m_engine = std::make_unique<QQmlEngine>();
+        Qt::Object::connect(m_engine.get(), &QQmlEngine::quit, qApp, &QCoreApplication::quit);
+        m_component = std::make_unique<QQmlComponent>(m_engine.get());
         QQuickWindow::setDefaultAlphaBuffer(true);
-        component.loadUrl(qml_entry);
-        if(component.isReady())
-          component.create();
+        m_component->loadUrl(QML_ENTRY);
+        if(m_component->isReady())
+          m_component->create();
         else
-          llog(Error) component.errorString();
+          llog(Error) m_component->errorString();
+
+        return T::exec();
       }
 
     private:
-      ApplicationBase* m_base;
+      std::unique_ptr<ApplicationBase> m_base;
       int m_argc;
       char** m_argv;
       ProjectInfo m_project_info;
@@ -153,6 +153,8 @@ namespace QtEx
       bool m_dump_platform_info;
       bool m_free_console;
       std::unique_ptr<T> m_app;
+      std::unique_ptr<QQmlEngine> m_engine;
+      std::unique_ptr<QQmlComponent> m_component;
   };
 } // QtEx
 
