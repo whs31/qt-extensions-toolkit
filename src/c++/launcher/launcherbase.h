@@ -17,6 +17,7 @@
 #include <QtExtensions/Logging>
 #include <QtExtensionsToolkit/ApplicationBase>
 #include <QtExtensionsToolkit/QApplicationSelector>
+#include <utility>
 
 namespace QtEx
 {
@@ -58,21 +59,38 @@ namespace QtEx
     Qt::String style;
   };
 
+  enum class StartupMessage : u8
+  {
+    DumpPlatformInfo,
+    None
+  };
+
+  enum class ConsoleBehaviour : u8
+  {
+    ReleaseConsole,
+    KeepConsole
+  };
+
   template <typename T, typename U,
             std::enable_if_t<std::is_base_of<QCoreApplication, T>::value, bool> = true,
             std::enable_if_t<std::is_base_of<ApplicationBase, U>::value, bool> = true>
   class ApplicationLauncher
   {
     public:
-      explicit ApplicationLauncher(int argc, char** argv)
+      explicit ApplicationLauncher(int argc, char** argv,
+                                   ProjectInfo info = ProjectInfo(),
+                                   QuickParameters parameters = QuickParameters(),
+                                   Qt::String icon_path = Qt::String(),
+                                   StartupMessage msg = StartupMessage::DumpPlatformInfo,
+                                   ConsoleBehaviour console_behaviour = ConsoleBehaviour::ReleaseConsole)
         : m_argc(argc)
         , m_argv(argv)
         , m_base(std::make_unique<U>())
-        , m_project_info(ProjectInfo())
-        , m_quick_parameters(QuickParameters())
-        , m_icon_path(Qt::String())
-        , m_dump_platform_info(true)
-        , m_free_console(false)
+        , m_project_info(std::move(info))
+        , m_quick_parameters(std::move(parameters))
+        , m_icon_path(std::move(icon_path))
+        , m_dump_platform_info(msg)
+        , m_free_console(console_behaviour)
       {}
 
       [[nodiscard]] ApplicationBase* base() const { return m_base.get(); }
@@ -88,17 +106,17 @@ namespace QtEx
       [[nodiscard]] Qt::String iconPath() const { return m_icon_path; }
       void setIconPath(const Qt::String& x) { m_icon_path = x; }
 
-      [[nodiscard]] bool dumpPlatformInfo() const { return m_dump_platform_info; }
-      void setDumpPlatformInfo(bool x) { m_dump_platform_info = x; }
+      [[nodiscard]] StartupMessage dumpPlatformInfo() const { return m_dump_platform_info; }
+      void setDumpPlatformInfo(StartupMessage x) { m_dump_platform_info = x; }
 
-      [[nodiscard]] bool freeConsole() const { return m_free_console; }
-      void setFreeConsole(bool x) { m_free_console = x; }
+      [[nodiscard]] ConsoleBehaviour freeConsole() const { return m_free_console; }
+      void setFreeConsole(ConsoleBehaviour x) { m_free_console = x; }
 
       int launch() noexcept
       {
         using Qtx::Log;
 
-        if(freeConsole())
+        if(freeConsole() == ConsoleBehaviour::ReleaseConsole)
           Libra::Windows::releaseConsole();
 
         m_app = std::make_unique<T>(m_argc, m_argv);
@@ -115,7 +133,7 @@ namespace QtEx
 
         Log::setLoggingPattern();
 
-        if(dumpPlatformInfo())
+        if(dumpPlatformInfo() == StartupMessage::DumpPlatformInfo)
         {
           Log::printPlatformInfo();
           Log::linebreak();
@@ -152,8 +170,8 @@ namespace QtEx
       ProjectInfo m_project_info;
       QuickParameters m_quick_parameters;
       Qt::String m_icon_path;
-      bool m_dump_platform_info;
-      bool m_free_console;
+      StartupMessage m_dump_platform_info;
+      ConsoleBehaviour m_free_console;
       std::unique_ptr<T> m_app;
       std::unique_ptr<QQmlEngine> m_engine;
       std::unique_ptr<QQmlComponent> m_component;
