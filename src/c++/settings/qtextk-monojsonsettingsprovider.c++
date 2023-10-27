@@ -8,7 +8,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QCoreApplication>
-#include <QtExCore/Logging>
+#include <QtExtensions/Logging>
 
 namespace QtEx
 {

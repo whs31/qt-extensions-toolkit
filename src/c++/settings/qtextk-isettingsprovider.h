@@ -7,7 +7,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QMetaType>
 #include <QtCore/QVariant>
-#include <QtExCore/Global>
+#include <QtExtensions/QtExtensions>
 
 using Qt::String;
 using Qt::Variant;

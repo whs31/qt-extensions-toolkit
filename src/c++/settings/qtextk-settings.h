@@ -6,9 +6,9 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
-#include <QtQml/qqml.h>
-#include <QtExCore/Global>
-#include <QtExToolkit/ISettingsProvider>
+#include <QtExtensions/QMLRegistration>
+#include <QtExtensions/Global>
+#include <QtExtensionsToolkit/ISettingsProvider>
 
 namespace QtEx
 {

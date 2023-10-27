@@ -5,7 +5,7 @@
 #pragma once
 
 #include <map>
-#include <QtExToolkit/ISettingsProvider>
+#include <QtExtensionsToolkit/ISettingsProvider>
 
 using std::map;
 

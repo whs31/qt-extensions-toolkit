@@ -4,7 +4,7 @@
 
 #include "qtextk-settings.h"
 #include <stdexcept>
-#include <QtExCore/Logging>
+#include <QtExtensions/Logging>
 
 namespace QtEx
 {
