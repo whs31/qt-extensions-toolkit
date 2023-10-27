@@ -5,6 +5,7 @@
 #include "toolkit.h"
 #include <QtExtensions/QMLRegistration>
 #include <QtExtensionsToolkit/FileDialogModel>
+#include <QtExtensionsToolkit/QuickGlobalPointerHolder>
 
 namespace QtEx
 {
@@ -12,5 +13,6 @@ namespace QtEx
   {
     qmlRegisterModule(uri, major, minor);
     qmlRegisterType<FileDialogModel>(uri, major, minor, "XFileDialogModel");
+    qmlRegisterSingletonType<QuickGlobalPointerHolder>(uri, major, minor, "XGlobal", QuickGlobalPointerHolder::create);
   }
 } // QtEx
