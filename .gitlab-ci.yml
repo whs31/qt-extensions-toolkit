@@ -1,0 +1,10 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_DEPTH: 100
+  PKG_VER: 0.0.0
+
+include:
+  - local: /.gitlab/ubuntu.yml
+
+stages:
+  - build
