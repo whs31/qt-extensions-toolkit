@@ -126,6 +126,8 @@ namespace QtEx
         }
 
         const QUrl QML_ENTRY(quickParameters().entry);
+        if(quickParameters().style == "Material")
+          qputenv("QT_QUICK_CONTROLS_MATERIAL_VARIANT", "Dense");
         QQuickStyle::setStyle(quickParameters().style);
 
         base()->start();
