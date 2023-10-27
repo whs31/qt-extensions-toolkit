@@ -35,13 +35,14 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED
   COMPONENTS
     Core
     Quick
+    Widgets
 )
 
 enable_testing()
 include_directories(src/c++ include)
 
 file(GLOB_RECURSE QTEX_TK src/c++/*)
-file(GLOB_RECURSE QTEX_TK_INCLUDE include/QtExToolkit/*)
+file(GLOB_RECURSE QTEX_TK_INCLUDE include/QtExtensionsToolkit/*)
 
 add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME}
@@ -55,6 +56,7 @@ target_link_libraries(${PROJECT_NAME}
   PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Quick
+    Qt${QT_VERSION_MAJOR}::Widgets
     QtExtensions
 )
 
