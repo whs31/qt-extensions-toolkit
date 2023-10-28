@@ -41,15 +41,37 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED
 enable_testing()
 include_directories(src/c++ include)
 
-file(GLOB_RECURSE QTEX_TK src/c++/*)
-file(GLOB_RECURSE QTEX_TK_INCLUDE include/QtExtensionsToolkit/*)
-
 add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME}
   PUBLIC
-    ${QTEX_TK_INCLUDE}
+    include/QtExtensionsToolkit/ApplicationBase
+    include/QtExtensionsToolkit/FileDialogModel
+    include/QtExtensionsToolkit/ISettingsProvider
+    include/QtExtensionsToolkit/Launcher
+    include/QtExtensionsToolkit/MonoJsonSettingsProvider
+    include/QtExtensionsToolkit/QApplicationSelector
+    include/QtExtensionsToolkit/QuickGlobalPointerHolder
+    include/QtExtensionsToolkit/Register
+    include/QtExtensionsToolkit/Settings
+
+    resources/toolkit_rc.qrc
+    src/js/toolkit_js.qrc
+    src/qml/toolkit_qml.qrc
   PRIVATE
-    ${QTEX_TK}
+    src/c++/launcher/applicationbase.h
+    src/c++/launcher/launcherbase.h
+    src/c++/launcher/qapplication_selector.h
+    src/c++/quick/quickglobalpointerholder.c++
+    src/c++/quick/quickglobalpointerholder.h
+    src/c++/settings/qtextk-isettingsprovider.h
+    src/c++/settings/qtextk-monojsonsettingsprovider.c++
+    src/c++/settings/qtextk-monojsonsettingsprovider.h
+    src/c++/settings/qtextk-settings.c++
+    src/c++/settings/qtextk-settings.h
+    src/c++/widgets/filedialogmodel.c++
+    src/c++/widgets/filedialogmodel.h
+    src/c++/toolkit.c++
+    src/c++/toolkit.h
 )
 
 target_link_libraries(${PROJECT_NAME}

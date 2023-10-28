@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="qtx/">
+        <file>widgets/FileDialog.qml</file>
+    </qresource>
+</RCC>
