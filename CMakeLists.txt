@@ -46,6 +46,7 @@ target_sources(${PROJECT_NAME}
   PUBLIC
     include/QtExtensionsToolkit/ApplicationBase
     include/QtExtensionsToolkit/FileDialogModel
+    include/QtExtensionsToolkit/FontProvider
     include/QtExtensionsToolkit/ISettingsProvider
     include/QtExtensionsToolkit/Launcher
     include/QtExtensionsToolkit/MonoJsonSettingsProvider
@@ -61,6 +62,8 @@ target_sources(${PROJECT_NAME}
     src/c++/launcher/applicationbase.h
     src/c++/launcher/launcherbase.h
     src/c++/launcher/qapplication_selector.h
+    src/c++/launcher/fontprovider.h
+    src/c++/launcher/fontprovider.c++
     src/c++/quick/quickglobalpointerholder.c++
     src/c++/quick/quickglobalpointerholder.h
     src/c++/settings/qtextk-isettingsprovider.h
