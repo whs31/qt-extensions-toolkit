@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="qtx/">
         <file>widgets/FileDialog.qml</file>
+        <file>utils/ThemeChanger.qml</file>
     </qresource>
 </RCC>
