@@ -17,7 +17,6 @@ namespace QtEx
   class ThemeImpl : public Qt::Object
   {
     Q_OBJECT
-    Q_PROPERTY(int darkMode READ darkMode WRITE darkMode NOTIFY darkModeChanged FINAL)
 
     public:
       enum ThemePalette
@@ -58,35 +57,38 @@ namespace QtEx
 
       explicit ThemeImpl(Qt::Object* parent = nullptr);
 
-      [[nodiscard]] int darkMode() const;      void setDarkMode(int);
       [[nodiscard]] invokable QColor color(ThemePalette) const noexcept;
 
       friend class Theme;
 
-    signals:
-      void darkModeChanged();
-
     private:
-      static void emplace(const Qt::String& folder, const Qt::String& fallback_path, const Qt::String& fallback_name) noexcept;
+      static void
+      emplace(const Qt::String& folder, const Qt::String& fallback_path, const Qt::String& fallback_name) noexcept;
+
       void load(const Qt::String& folder, const Qt::String& name) noexcept;
 
     private:
       ThemeMode m_dark_mode;
-      map<ThemePalette, Qt::Color> m_dict_light;
-      map<ThemePalette, Qt::Color> m_dict_dark;
+      map <ThemePalette, Qt::Color> m_dict_light;
+      map <ThemePalette, Qt::Color> m_dict_dark;
       Qt::String m_folder;
       Qt::String m_name;
       Qt::String m_fallback;
 
-      map<Qt::String, ThemePalette> EnumerationDictionary;
+      map <Qt::String, ThemePalette> EnumerationDictionary;
   };
+} // QtEx
+Q_DECLARE_METATYPE(QtEx::ThemeImpl*)
 
+namespace QtEx
+{
   class Theme : public Qt::Object
   {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
     Q_PROPERTY(QString folder READ folder WRITE setFolder NOTIFY folderChanged FINAL)
     Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged FINAL)
+    Q_PROPERTY(int darkMode READ darkMode WRITE setDarkMode NOTIFY darkModeChanged FINAL)
     Q_PROPERTY(ThemeImpl* io READ io NOTIFY ioChanged FINAL)
 
     public:
@@ -137,17 +139,17 @@ namespace QtEx
       Theme& operator=(const Theme&) = delete;
       Theme& operator=(Theme&&) = delete;
 
-      [[nodiscard]] Qt::String name() const;    void setName(const Qt::String&);
-      [[nodiscard]] Qt::String folder() const;  void setFolder(const Qt::String&);
-      [[nodiscard]] Qt::String fallback() const;void setFallback(const Qt::String&);
+      [[nodiscard]] Qt::String name() const;      void setName(const Qt::String&);
+      [[nodiscard]] Qt::String folder() const;    void setFolder(const Qt::String&);
+      [[nodiscard]] Qt::String fallback() const;  void setFallback(const Qt::String&);
+      [[nodiscard]] int darkMode() const;         void setDarkMode(int);
       [[nodiscard]] ThemeImpl* io() const;
-
-      friend class ThemeImpl;
 
     signals:
       void nameChanged();
       void folderChanged();
       void fallbackChanged();
+      void darkModeChanged();
       void ioChanged();
 
     private:
@@ -158,4 +160,5 @@ namespace QtEx
   };
 } // QtEx
 
+Q_DECLARE_METATYPE(QtEx::Theme*)
 

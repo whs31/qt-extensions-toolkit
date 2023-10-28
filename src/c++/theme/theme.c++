@@ -51,21 +51,15 @@ namespace QtEx
     , m_name("Catpuccin")
     , m_fallback(":/qtx/themes/catpuccin.json")
   {
-
+    qRegisterMetaType<ThemeImpl*>("ThemeImpl*");
+    ThemeImpl::emplace(m_folder, m_fallback, "catpuccin.json");
   }
 
-  int ThemeImpl::darkMode() const { return static_cast<int>(m_dark_mode); }
-  void ThemeImpl::setDarkMode(int x)
-  {
-    if(x == m_dark_mode)
-      return;
-    m_dark_mode = static_cast<ThemeMode>(x);
-    emit darkModeChanged();
-  }
+
 
   QColor ThemeImpl::color(ThemeImpl::ThemePalette key) const noexcept
   {
-    switch(darkMode())
+    switch(m_dark_mode)
     {
       case Light: return m_dict_light.at(key);
       case Dark: [[fallthrough]];
@@ -125,17 +119,23 @@ namespace QtEx
         continue;
       }
 
-      auto light = json["light"].toObject();
-      for(auto it = light.begin(); it != json.end(); ++it)
-        m_dict_light.insert({
-          EnumerationDictionary[it.key()],
-          Qt::Color(it.value().toString())
-        });
+      {
+        auto light = json["light"].toObject();
+        for(auto it = light.begin(); it != light.end(); ++it)
+          m_dict_light.insert({
+            EnumerationDictionary[it.key()],
+            Qt::Color(it.value().toString())
+          });
+      }
 
-      auto dark = json["dark"].toObject();
-//        for(auto it = json.begin(); it != json.end(); ++it)
-//          m_json.insert({it.key(), it.value().toVariant()});
-
+      {
+        auto dark = json["dark"].toObject();
+        for(auto it = dark.begin(); it != dark.end(); ++it)
+          m_dict_dark.insert({
+            EnumerationDictionary[it.key()],
+            Qt::Color(it.value().toString())
+          });
+      }
     }
   }
 
@@ -143,40 +143,47 @@ namespace QtEx
   auto Theme::create(QQmlEngine* qml_engine, QJSEngine* js_engine) -> Theme* { return get(); }
 
   Qt::String Theme::name() const { return io()->m_name; }
-  void Theme::setName(const Qt::String&)
+  void Theme::setName(const Qt::String& x)
   {
-
+    io()->m_name = x;
+    emit nameChanged();
+    io()->load(folder(), name());
+    emit ioChanged();
   }
 
-  Qt::String Theme::folder() const
+  Qt::String Theme::folder() const { return io()->m_folder; }
+  void Theme::setFolder(const Qt::String& x)
   {
-    return Qt::String();
+    io()->m_folder = x;
+    emit folderChanged();
+    io()->load(folder(), name());
+    emit ioChanged();
   }
 
-  void Theme::setFolder(const Qt::String&)
+  Qt::String Theme::fallback() const { return io()->m_fallback; }
+  void Theme::setFallback(const Qt::String& x)
   {
-
+    io()->m_fallback = x;
+    emit fallbackChanged();
+    ThemeImpl::emplace(folder(), fallback(), "fallback.json");
   }
 
-  Qt::String Theme::fallback() const
+  int Theme::darkMode() const { return static_cast<int>(io()->m_dark_mode); }
+  void Theme::setDarkMode(int x)
   {
-    return Qt::String();
+    if(x == io()->m_dark_mode)
+      return;
+    io()->m_dark_mode = static_cast<ThemeImpl::ThemeMode>(static_cast<ThemeMode>(x));
+    emit darkModeChanged();
+    emit ioChanged();
   }
 
-  void Theme::setFallback(const Qt::String&)
-  {
-
-  }
-
-  ThemeImpl* Theme::io() const
-  {
-    return nullptr;
-  }
+  ThemeImpl* Theme::io() const { return m_io; }
 
   Theme::Theme(Qt::Object* parent)
     : Qt::Object(parent)
     , m_io(new ThemeImpl(this))
   {
-
+    io()->load(io()->m_folder, io()->m_name);
   }
 } // QtEx

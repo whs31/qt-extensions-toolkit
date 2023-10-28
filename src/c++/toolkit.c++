@@ -6,6 +6,7 @@
 #include <QtExtensions/QMLRegistration>
 #include <QtExtensionsToolkit/FileDialogModel>
 #include <QtExtensionsToolkit/QuickGlobalPointerHolder>
+#include <QtExtensionsToolkit/Theme>
 
 inline void initResources()
 {
@@ -23,6 +24,7 @@ namespace QtEx
     qmlRegisterModule(uri, major, minor);
     qmlRegisterType<FileDialogModel>(uri, major, minor, "QtxFileDialogModel");
     qmlRegisterSingletonType<QuickGlobalPointerHolder>(uri, major, minor, "QtxGlobal", QuickGlobalPointerHolder::create);
+    qmlRegisterSingletonType<Theme>(uri, major, minor, "Theme", Theme::create);
 
     qmlRegisterType(QUrl("qrc:/qtx/widgets/FileDialog.qml"), uri, major, minor, "QtxFileDialog");
   }
