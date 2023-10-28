@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Controls.Material
 import QtQuick.Controls.Universal
 
 import QtExtensions.Toolkit 1.0
