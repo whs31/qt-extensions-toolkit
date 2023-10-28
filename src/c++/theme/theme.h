@@ -63,6 +63,8 @@ namespace QtEx
 
     private:
       static void emplace(const Qt::String& folder, const Qt::String& fallback_path, const Qt::String& fallback_name) noexcept;
+      static auto isSystemInDarkMode() noexcept -> bool;
+
       void load(const Qt::String& folder, const Qt::String& name) noexcept;
 
     private:
@@ -152,6 +154,7 @@ namespace QtEx
 
     private:
       explicit Theme(Qt::Object* parent = nullptr);
+      bool eventFilter(Qt::Object* object, QEvent* event) override;
 
     private:
       ThemeImpl* m_io;

@@ -45,6 +45,7 @@ add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME}
   PUBLIC
     include/QtExtensionsToolkit/ApplicationBase
+    include/QtExtensionsToolkit/CircularReveal
     include/QtExtensionsToolkit/FileDialogModel
     include/QtExtensionsToolkit/FontProvider
     include/QtExtensionsToolkit/ISettingsProvider
@@ -76,6 +77,8 @@ target_sources(${PROJECT_NAME}
     src/c++/widgets/filedialogmodel.h
     src/c++/theme/theme.h
     src/c++/theme/theme.c++
+    src/c++/theme/circularreveal.h
+    src/c++/theme/circularreveal.c++
     src/c++/toolkit.c++
     src/c++/toolkit.h
 )

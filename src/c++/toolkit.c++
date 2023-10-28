@@ -7,6 +7,7 @@
 #include <QtExtensionsToolkit/FileDialogModel>
 #include <QtExtensionsToolkit/QuickGlobalPointerHolder>
 #include <QtExtensionsToolkit/Theme>
+#include <QtExtensionsToolkit/CircularReveal>
 
 inline void initResources()
 {
@@ -23,6 +24,7 @@ namespace QtEx
   {
     qmlRegisterModule(uri, major, minor);
     qmlRegisterType<FileDialogModel>(uri, major, minor, "QtxFileDialogModel");
+    qmlRegisterType<CircularReveal>(uri, major, minor, "QtxCircularReveal");
     qmlRegisterSingletonType<QuickGlobalPointerHolder>(uri, major, minor, "QtxGlobal", QuickGlobalPointerHolder::create);
     qmlRegisterSingletonType<Theme>(uri, major, minor, "Theme", Theme::create);
 

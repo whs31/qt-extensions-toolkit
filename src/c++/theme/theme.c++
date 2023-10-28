@@ -3,12 +3,21 @@
 //
 
 #include "theme.h"
-#include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
+#include <QtGui/QGuiApplication>
 #include <QtExtensions/Logging>
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#include <QtGui/QStyleHints>
+#elif ((QT_VERSION >= QT_VERSION_CHECK(6, 2, 1)))
+#include <QtGui/qpa/qplatformtheme.h>
+#include <QtGui/private/qguiapplication_p.h>
+#else
+#include <QtGui/QPalette>
+#endif
 
 namespace QtEx
 {
@@ -139,6 +148,21 @@ namespace QtEx
     }
   }
 
+  auto ThemeImpl::isSystemInDarkMode() noexcept -> bool
+  {
+    #if(QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+    return (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark);
+    #elif((QT_VERSION >= QT_VERSION_CHECK(6, 2, 1)))
+    if(const QPlatformTheme* const theme = QGuiApplicationPrivate::platformTheme())
+       return(theme->appearance() == QPlatformTheme::Appearance::Dark);
+    return false;
+    #else
+      QPalette palette = qApp->palette();
+      QColor color = palette.color(QPalette::Window).rgb();
+      return not (color.red() * 0.2126 + color.green() * 0.7152 + color.blue() * 0.0722 > 255 / 2);
+    #endif
+  }
+
   auto Theme::get() -> Theme* { static Theme instance; return &instance; }
   auto Theme::create(QQmlEngine* qml_engine, QJSEngine* js_engine) -> Theme* { return get(); }
 
@@ -185,5 +209,18 @@ namespace QtEx
     , m_io(new ThemeImpl(this))
   {
     io()->load(io()->m_folder, io()->m_name);
+    QGuiApplication::instance()->installEventFilter(this);
+  }
+
+  bool Theme::eventFilter(Qt::Object* object, QEvent* event)
+  {
+    (void)object;
+    if(event->type() == QEvent::ApplicationPaletteChange or event->type() == QEvent::ThemeChange)
+    {
+      setDarkMode(ThemeImpl::isSystemInDarkMode() ? ThemeMode::Dark : ThemeMode::Light);
+      event->accept();
+      return true;
+    }
+    return false;
   }
 } // QtEx
