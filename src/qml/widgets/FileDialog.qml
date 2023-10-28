@@ -18,6 +18,8 @@ Popup {
     padding: 0
 
     Overlay.modal: Rectangle { color: "#66000000" }
+    enter: Transition { NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 100 } }
+    exit: Transition { NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 100 } }
 
     Page {
         anchors.fill: parent
