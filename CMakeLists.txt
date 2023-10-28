@@ -54,6 +54,7 @@ target_sources(${PROJECT_NAME}
     include/QtExtensionsToolkit/QuickGlobalPointerHolder
     include/QtExtensionsToolkit/Register
     include/QtExtensionsToolkit/Settings
+    include/QtExtensionsToolkit/Theme
 
     resources/toolkit_rc.qrc
     src/js/toolkit_js.qrc
@@ -73,6 +74,8 @@ target_sources(${PROJECT_NAME}
     src/c++/settings/qtextk-settings.h
     src/c++/widgets/filedialogmodel.c++
     src/c++/widgets/filedialogmodel.h
+    src/c++/theme/theme.h
+    src/c++/theme/theme.c++
     src/c++/toolkit.c++
     src/c++/toolkit.h
 )

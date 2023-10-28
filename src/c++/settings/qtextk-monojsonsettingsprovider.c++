@@ -44,18 +44,18 @@ namespace QtEx
 
   void MonoJsonSettingsProvider::load() noexcept
   {
-    Log::log(Debug) << scope_information << "Loading settings";
-    QFile file(m_filepath);
+    llog(Debug) "Loading settings";
+    Qt::File file(m_filepath);
     if(not file.exists())
-      QFile::copy(m_fallback_file, m_filepath);
+      Qt::File::copy(m_fallback_file, m_filepath);
     file.setPermissions(QFileDevice::ReadUser | QFileDevice::WriteUser);
     if(not file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-      Log::log(Error) << scope_information << "Failed to open file for read:" << m_filepath;
+      llog(Error) "Failed to open file for read:" << m_filepath;
       return;
     }
 
-    auto doc = QJsonDocument::fromJson(file.readAll());
+    auto doc = Qt::JsonDocument::fromJson(file.readAll());
     file.close();
 
     if(not doc.isNull() and doc.isObject())
@@ -68,13 +68,14 @@ namespace QtEx
 
   void MonoJsonSettingsProvider::save() const noexcept
   {
-    Log::log(Debug) << scope_information << "Saving settings";
-    auto data = QJsonDocument(QJsonObject::fromVariantMap(QMap<String, Variant>(m_json))).toJson(QJsonDocument::JsonFormat::Indented);
-    QFile::remove(m_filepath);
-    QFile file(m_filepath);
+    llog(Debug) "Saving settings";
+    auto data = Qt::JsonDocument(Qt::JsonObject::fromVariantMap(QMap<String, Variant>(m_json)))
+                              .toJson(Qt::JsonDocument::JsonFormat::Indented);
+    Qt::File::remove(m_filepath);
+    Qt::File file(m_filepath);
     if(not file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-      Log::log(Error) << scope_information << "Failed to open file for write:" << m_filepath;
+      llog(Error) "Failed to open file for write:" << m_filepath;
       return;
     }
     file.write(data);
