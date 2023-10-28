@@ -62,9 +62,7 @@ namespace QtEx
       friend class Theme;
 
     private:
-      static void
-      emplace(const Qt::String& folder, const Qt::String& fallback_path, const Qt::String& fallback_name) noexcept;
-
+      static void emplace(const Qt::String& folder, const Qt::String& fallback_path, const Qt::String& fallback_name) noexcept;
       void load(const Qt::String& folder, const Qt::String& name) noexcept;
 
     private:

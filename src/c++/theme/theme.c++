@@ -91,7 +91,7 @@ namespace QtEx
     Directory directory(folder, "*.json", QDir::Name | QDir::IgnoreCase, QDir::Files | QDir::Hidden);
     for(const auto& entry : directory.entryList())
     {
-      File file(entry);
+      File file(folder + "/" + entry);
       file.setPermissions(QFileDevice::ReadUser | QFileDevice::WriteUser);
       if(not file.open(QIODevice::ReadOnly | QIODevice::Text))
       {
