@@ -91,27 +91,9 @@ namespace QtEx
   auto FileDialogModel::parseSize(u64 size) -> String
   {
     using std::pow;
-
-    array<String , 7> prefixes = {
-        " bit",
-        " B",
-        " KB",
-        " MB",
-        " GB",
-        " TB",
-        " PB"
-    };
-
-    if(size < 1024)
-      return String::number(size) + prefixes[1];
-    if((f64)size < pow(1024, 2))
-      return String::number(static_cast<f32>(size) / 1024, 'f', 2) + prefixes[2];
-    if((f64)size < pow(1024, 3))
-      return String::number(static_cast<f32>(size) / pow(1024, 2), 'f', 2) + prefixes[3];
-    if((f64)size < pow(1024, 4))
-      return String::number(static_cast<f32>(size) / pow(1024, 3), 'f', 2) + prefixes[4];
-    if((f64)size < pow(1024, 5))
-      return String::number(static_cast<f32>(size) / pow(1024, 4), 'f', 2) + prefixes[5];
-    return {};
+    static array<String , 7> prefixes{ " bit", " B", " KB", " MB", " GB", " TB", " PB" };
+    auto log1024 = [](auto &num) -> int{return static_cast<int>(std::log(num) / std::log(1024));};
+    auto exp = log1024(size);
+    return String::number(static_cast<f32>(size) / pow(1024, exp), 'f', 2) + prefixes[exp + 1];
   }
 } // QtEx
