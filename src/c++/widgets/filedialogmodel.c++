@@ -33,7 +33,7 @@ namespace QtEx
     : Qt::AbstractListModel(parent)
     , m_sort_flags(QDir::DirsFirst | QDir::Name | QDir::IgnoreCase)
     , m_filters(QDir::Files | QDir::Hidden | QDir::Dirs | QDir::NoDotAndDotDot)
-    , m_mask("*.dll")
+    , m_mask("*")
   {
     this->setPath(QCoreApplication::applicationDirPath());
   }
