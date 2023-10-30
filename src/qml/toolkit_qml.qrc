@@ -12,5 +12,7 @@
         <file>ui/QtxRangeSlider.qml</file>
         <file>ui/QtxTooltip.qml</file>
         <file>ui/QtxUIShadow.qml</file>
+        <file>ui/QtxClip.qml</file>
+        <file>ui/QtxProgressBar.qml</file>
     </qresource>
 </RCC>

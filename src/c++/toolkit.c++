@@ -9,6 +9,7 @@
 #include <QtExtensionsToolkit/Theme>
 #include <QtExtensionsToolkit/CircularReveal>
 #include <QtExtensionsToolkit/FluentIcons>
+#include <QtExtensionsToolkit/FluentRectangle>
 
 inline void initResources()
 {
@@ -26,6 +27,7 @@ namespace QtEx
     qmlRegisterModule(uri, major, minor);
     qmlRegisterType<FileDialogModel>(uri, major, minor, "QtxFileDialogModel");
     qmlRegisterType<CircularReveal>(uri, major, minor, "QtxCircularReveal");
+    qmlRegisterType<Fluent::Rectangle>(uri, major, minor, "FluentRectangle");
     qmlRegisterSingletonType<QuickGlobalPointerHolder>(uri, major, minor, "QtxGlobal", QuickGlobalPointerHolder::create);
     qmlRegisterSingletonType<Theme>(uri, major, minor, "Theme", Theme::create);
 
@@ -39,8 +41,10 @@ namespace QtEx
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxCheckbox.qml"), uri, major, minor, "FluentCheckbox");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTooltip.qml"), uri, major, minor, "FluentTooltip");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxUIShadow.qml"), uri, major, minor, "FluentShadow");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxClip.qml"), uri, major, minor, "FluentClip");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSlider.qml"), uri, major, minor, "FluentSlider");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxRangeSlider.qml"), uri, major, minor, "FluentRangeSlider");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxProgressBar.qml"), uri, major, minor, "FluentProgressBar");
 
     qmlRegisterUncreatableMetaObject(Fluent::staticMetaObject, uri, major, minor, "FluentIcons", "Access to enums & flags only");
   }

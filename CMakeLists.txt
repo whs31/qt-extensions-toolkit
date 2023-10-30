@@ -57,6 +57,7 @@ target_sources(${PROJECT_NAME}
     include/QtExtensionsToolkit/Settings
     include/QtExtensionsToolkit/Theme
     include/QtExtensionsToolkit/FluentIcons
+    include/QtExtensionsToolkit/FluentRectangle
 
     resources/toolkit_rc.qrc
     src/js/toolkit_js.qrc
@@ -69,6 +70,8 @@ target_sources(${PROJECT_NAME}
     src/c++/launcher/fontprovider.c++
     src/c++/quick/quickglobalpointerholder.c++
     src/c++/quick/quickglobalpointerholder.h
+    src/c++/quick/fluentrectangle.h
+    src/c++/quick/fluentrectangle.c++
     src/c++/settings/qtextk-isettingsprovider.h
     src/c++/settings/qtextk-monojsonsettingsprovider.c++
     src/c++/settings/qtextk-monojsonsettingsprovider.h

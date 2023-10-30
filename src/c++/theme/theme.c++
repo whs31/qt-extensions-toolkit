@@ -60,9 +60,9 @@ namespace QtEx
     , m_name("Catpuccin")
     , m_fallback(":/qtx/themes/catpuccin.json")
     , m_dict_primary({
-      { PrimaryDark, Mauve },
-      { Primary, Mauve },
-      { PrimaryLight, Lavender }
+      { PrimaryDark, Peach },
+      { Primary, Peach },
+      { PrimaryLight, Peach }
     })
   {
     qRegisterMetaType<ThemeImpl*>("ThemeImpl*");
