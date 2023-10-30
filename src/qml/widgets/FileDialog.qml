@@ -1,9 +1,9 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import QtQuick.Controls.Universal
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls.Universal 2.15
 
-import QtExtensions.Toolkit 1.0
+import QtExtensions.Toolkit
 
 import "qrc:/qtx/FileExtensions.js" as FileExtensions
 
