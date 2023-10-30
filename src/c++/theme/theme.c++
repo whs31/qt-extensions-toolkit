@@ -26,47 +26,46 @@ namespace QtEx
   using Qt::String;
 
   ThemeImpl::ThemeImpl(Qt::Object* parent)
-    : Qt::Object(parent)
-    , m_dark_mode(Dark)
-    , EnumerationDictionary({
-      { "rosewater", Rosewater },
-      { "flamingo", Flamingo },
-      { "pink", Pink },
-      { "mauve", Mauve },
-      { "red", Red },
-      { "maroon", Maroon },
-      { "peach", Peach },
-      { "yellow", Yellow },
-      { "green", Green },
-      { "teal", Teal },
-      { "sky", Sky },
-      { "sapphire", Sapphire },
-      { "blue", Blue },
-      { "lavender", Lavender },
-      { "text", Text },
-      { "subtext1", Subtext1 },
-      { "subtext0", Subtext0 },
-      { "overlay2", Overlay2 },
-      { "overlay1", Overlay1 },
-      { "overlay0", Overlay0 },
-      { "surface2", Surface2 },
-      { "surface1", Surface1 },
-      { "surface0", Surface0 },
-      { "base", Base },
-      { "mantle", Mantle },
-      { "crust", Crust }
-    })
-    , m_folder(QCoreApplication::applicationDirPath() + "/theme")
-    , m_name("Catpuccin")
-    , m_fallback(":/qtx/themes/catpuccin.json")
-    , m_dict_primary({
-      { PrimaryDark, Peach },
-      { Primary, Peach },
-      { PrimaryLight, Peach }
-    })
+      : Qt::Object(parent)
+        , m_dark_mode(Dark)
+        , EnumerationDictionary({
+          { "rosewater", Rosewater },
+          { "flamingo", Flamingo },
+          { "pink", Pink },
+          { "mauve", Mauve },
+          { "red", Red },
+          { "maroon", Maroon },
+          { "peach", Peach },
+          { "yellow", Yellow },
+          { "green", Green },
+          { "teal", Teal },
+          { "sky", Sky },
+          { "sapphire", Sapphire },
+          { "blue", Blue },
+          { "lavender", Lavender },
+          { "text", Text },
+          { "subtext1", Subtext1 },
+          { "subtext0", Subtext0 },
+          { "overlay2", Overlay2 },
+          { "overlay1", Overlay1 },
+          { "overlay0", Overlay0 },
+          { "surface2", Surface2 },
+          { "surface1", Surface1 },
+          { "surface0", Surface0 },
+          { "base", Base },
+          { "mantle", Mantle },
+          { "crust", Crust }
+        })
+        , m_folder(QCoreApplication::applicationDirPath() + "/theme")
+        , m_name("Catpuccin")
+        , m_fallback(":/qtx/themes/catpuccin.json")
+        , m_dict_primary({
+          { PrimaryDark, Peach },
+          { Primary, Peach },
+          { PrimaryLight, Peach }
+        })
   {
     qRegisterMetaType<ThemeImpl*>("ThemeImpl*");
-
   }
 
   QColor ThemeImpl::color(ThemeImpl::ThemePalette key) const noexcept
@@ -134,19 +133,13 @@ namespace QtEx
       {
         auto light = json["light"].toObject();
         for(auto it = light.begin(); it != light.end(); ++it)
-          m_dict_light.insert({
-            EnumerationDictionary[it.key()],
-            Qt::Color(it.value().toString())
-          });
+          m_dict_light[EnumerationDictionary[it.key()]] = Qt::Color(it.value().toString());
       }
 
       {
         auto dark = json["dark"].toObject();
         for(auto it = dark.begin(); it != dark.end(); ++it)
-          m_dict_dark.insert({
-            EnumerationDictionary[it.key()],
-            Qt::Color(it.value().toString())
-          });
+          m_dict_dark[EnumerationDictionary[it.key()]] = Qt::Color(it.value().toString());
       }
     }
   }
@@ -210,16 +203,16 @@ namespace QtEx
   ThemeImpl* Theme::io() const { return m_io; }
 
   Theme::Theme(Qt::Object* parent)
-    : Qt::Object(parent)
-    , m_io(new ThemeImpl(this))
-    , m_config(
-      std::make_unique<StaticConfig>(QCoreApplication::applicationDirPath() + "/config/theme.json",
-                                     ":/qtx/config/theme.json")
+      : Qt::Object(parent)
+        , m_io(new ThemeImpl(this))
+        , m_config(
+          std::make_unique<StaticConfig>(QCoreApplication::applicationDirPath() + "/config/theme.json",
+                                         ":/qtx/config/theme.json")
       )
   {
     io()->m_folder = QCoreApplication::applicationDirPath() + "/" + m_config->value<String>("folder");
     io()->m_name = m_config->value<String>("name");
-    ThemeImpl::emplace(folder(), name(), "catpuccin.json");
+    ThemeImpl::emplace(folder(), ":/qtx/themes/catpuccin.json", "catpuccin.json");
     io()->load(folder(), name());
     this->setDarkMode(m_config->value<bool>("dark") ? Dark : Light);
     QGuiApplication::instance()->installEventFilter(this);
