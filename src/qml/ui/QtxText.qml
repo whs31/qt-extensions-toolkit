@@ -5,5 +5,5 @@ import QtExtensions.Toolkit 1.0
 Text {
     id: text
     color: Theme.io.color(Theme.Text)
-    font: root.mainfont
+    font: mainfont
 }

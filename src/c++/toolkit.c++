@@ -36,6 +36,7 @@ namespace QtEx
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxButton.qml"), uri, major, minor, "FUIButton");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSwitch.qml"), uri, major, minor, "FUISwitch");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTTFIcon.qml"), uri, major, minor, "FUITTFIcon");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxCheckbox.qml"), uri, major, minor, "FUICheckbox");
 
     qmlRegisterUncreatableMetaObject(Fluent::staticMetaObject, uri, major, minor, "FluentIcons", "Access to enums & flags only");
   }

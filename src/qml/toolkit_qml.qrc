@@ -7,5 +7,6 @@
         <file>ui/QtxFocusRectangle.qml</file>
         <file>ui/QtxSwitch.qml</file>
         <file>ui/QtxTTFIcon.qml</file>
+        <file>ui/QtxCheckbox.qml</file>
     </qresource>
 </RCC>
