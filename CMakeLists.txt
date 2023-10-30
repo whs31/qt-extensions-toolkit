@@ -41,7 +41,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED
 enable_testing()
 include_directories(src/c++ include)
 
-add_library(${PROJECT_NAME} STATIC)
+add_library(${PROJECT_NAME} STATIC
+  src/c++/theme/fluenticons.h)
 target_sources(${PROJECT_NAME}
   PUBLIC
     include/QtExtensionsToolkit/ApplicationBase
@@ -56,6 +57,7 @@ target_sources(${PROJECT_NAME}
     include/QtExtensionsToolkit/Register
     include/QtExtensionsToolkit/Settings
     include/QtExtensionsToolkit/Theme
+    include/QtExtensionsToolkit/FluentIcons
 
     resources/toolkit_rc.qrc
     src/js/toolkit_js.qrc
@@ -79,6 +81,7 @@ target_sources(${PROJECT_NAME}
     src/c++/theme/theme.c++
     src/c++/theme/circularreveal.h
     src/c++/theme/circularreveal.c++
+    src/c++/theme/fluenticons.h
     src/c++/toolkit.c++
     src/c++/toolkit.h
 )
