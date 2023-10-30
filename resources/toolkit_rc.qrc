@@ -17,6 +17,7 @@
         <file>icons/file-types/video.svg</file>
         <file>icons/file-types/image.svg</file>
         <file>fonts/Roboto-Regular.ttf</file>
+        <file>fonts/FluentIcons.ttf</file>
         <file>themes/catpuccin.json</file>
         <file>config/theme.json</file>
     </qresource>

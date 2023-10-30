@@ -6,5 +6,6 @@
         <file>ui/QtxButton.qml</file>
         <file>ui/QtxFocusRectangle.qml</file>
         <file>ui/QtxSwitch.qml</file>
+        <file>ui/QtxTTFIcon.qml</file>
     </qresource>
 </RCC>

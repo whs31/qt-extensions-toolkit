@@ -34,5 +34,6 @@ namespace QtEx
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxFocusRectangle.qml"), uri, major, minor, "FUIFocusRectangle");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxButton.qml"), uri, major, minor, "FUIButton");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSwitch.qml"), uri, major, minor, "FUISwitch");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTTFIcon.qml"), uri, major, minor, "FUITTFIcon");
   }
 } // QtEx

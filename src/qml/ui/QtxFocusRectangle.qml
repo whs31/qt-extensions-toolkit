@@ -14,7 +14,7 @@ Item {
         color: "transparent"
         border.width: 2
         radius: control.radius
-        border.color: Theme.io.color(Theme.Crust)
+        border.color: Theme.io.color(Theme.Text)
         z: 65535
     }
 }
