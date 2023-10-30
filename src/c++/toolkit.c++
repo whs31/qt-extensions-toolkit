@@ -30,5 +30,6 @@ namespace QtEx
 
     qmlRegisterType(QUrl("qrc:/qtx/widgets/FileDialog.qml"), uri, major, minor, "QtxFileDialog");
     qmlRegisterType(QUrl("qrc:/qtx/utils/ThemeChanger.qml"), uri, major, minor, "QtxThemeChanger");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxText.qml"), uri, major, minor, "FUIText");
   }
 } // QtEx

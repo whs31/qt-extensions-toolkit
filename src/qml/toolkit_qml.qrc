@@ -2,5 +2,6 @@
     <qresource prefix="qtx/">
         <file>widgets/FileDialog.qml</file>
         <file>utils/ThemeChanger.qml</file>
+        <file>ui/QtxText.qml</file>
     </qresource>
 </RCC>
