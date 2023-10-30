@@ -3,5 +3,7 @@
         <file>widgets/FileDialog.qml</file>
         <file>utils/ThemeChanger.qml</file>
         <file>ui/QtxText.qml</file>
+        <file>ui/QtxButton.qml</file>
+        <file>ui/QtxFocusRectangle.qml</file>
     </qresource>
 </RCC>
