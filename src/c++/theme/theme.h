@@ -5,12 +5,15 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <QtCore/QObject>
 #include <QtGui/QColor>
 #include <QtExtensions/QtExtensions>
 #include <QtExtensions/QMLRegistration>
+#include <QtExtensions/StaticConfig>
 
 using std::map;
+using std::unique_ptr;
 
 namespace QtEx
 {
@@ -158,6 +161,7 @@ namespace QtEx
 
     private:
       ThemeImpl* m_io;
+      unique_ptr<StaticConfig> m_config;
   };
 } // QtEx
 

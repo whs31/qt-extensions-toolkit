@@ -61,10 +61,8 @@ namespace QtEx
     , m_fallback(":/qtx/themes/catpuccin.json")
   {
     qRegisterMetaType<ThemeImpl*>("ThemeImpl*");
-    ThemeImpl::emplace(m_folder, m_fallback, "catpuccin.json");
+
   }
-
-
 
   QColor ThemeImpl::color(ThemeImpl::ThemePalette key) const noexcept
   {
@@ -207,8 +205,16 @@ namespace QtEx
   Theme::Theme(Qt::Object* parent)
     : Qt::Object(parent)
     , m_io(new ThemeImpl(this))
+    , m_config(
+      std::make_unique<StaticConfig>(QCoreApplication::applicationDirPath() + "/config/theme.json",
+                                     ":/qtx/config/theme.json")
+      )
   {
-    io()->load(io()->m_folder, io()->m_name);
+    io()->m_folder = QCoreApplication::applicationDirPath() + "/" + m_config->value<String>("folder");
+    io()->m_name = m_config->value<String>("name");
+    ThemeImpl::emplace(folder(), name(), "catpuccin.json");
+    io()->load(folder(), name());
+    this->setDarkMode(m_config->value<bool>("dark") ? Dark : Light);
     QGuiApplication::instance()->installEventFilter(this);
   }
 
