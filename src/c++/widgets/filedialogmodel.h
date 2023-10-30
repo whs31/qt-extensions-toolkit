@@ -45,7 +45,8 @@ namespace QtEx
 
       explicit FileDialogModel(Qt::Object* parent = nullptr);
 
-      [[nodiscard]] String path() const;    void setPath(const String&);
+      [[nodiscard]] String path() const;
+      virtual void setPath(const String&);
 
       [[nodiscard]] int rowCount(const QModelIndex& = QModelIndex()) const override;
       [[nodiscard]] QVariant data(const QModelIndex& index, int role) const override;
