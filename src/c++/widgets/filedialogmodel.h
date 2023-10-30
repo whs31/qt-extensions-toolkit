@@ -7,6 +7,7 @@
 #include <vector>
 #include <QtCore/QDateTime>
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QDir>
 #include <QtExtensions/QtExtensions>
 
 namespace QtEx
@@ -45,8 +46,10 @@ namespace QtEx
 
       explicit FileDialogModel(Qt::Object* parent = nullptr);
 
-      [[nodiscard]] String path() const;
-      virtual void setPath(const String&);
+      [[nodiscard]] String path() const;                          void setPath(const String&);
+      [[nodiscard]] Qt::Directory::SortFlags sortFlags() const;   void setSortFlags(Qt::Directory::SortFlags);
+      [[nodiscard]] Qt::Directory::Filters filters() const;       void setFilters(Qt::Directory::Filters);
+      [[nodiscard]] Qt::String mask() const;                      void setMask(const Qt::String);
 
       [[nodiscard]] int rowCount(const QModelIndex& = QModelIndex()) const override;
       [[nodiscard]] QVariant data(const QModelIndex& index, int role) const override;
@@ -56,12 +59,16 @@ namespace QtEx
 
     protected:
       [[nodiscard]] QHash<int, QByteArray> roleNames() const override;
+      virtual void scan() noexcept;
 
       static auto parseSize(u64 size) -> String;
 
-    private:
+    protected:
       vector<FileEntry> m_storage;
       String m_path;
+      Qt::Directory::SortFlags m_sort_flags;
+      Qt::Directory::Filters m_filters;
+      Qt::String m_mask;
   };
 } // QtEx
 
