@@ -41,8 +41,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED
 enable_testing()
 include_directories(src/c++ include)
 
-add_library(${PROJECT_NAME} STATIC
-  src/c++/theme/fluenticons.h)
+add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME}
   PUBLIC
     include/QtExtensionsToolkit/ApplicationBase
