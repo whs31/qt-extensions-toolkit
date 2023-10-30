@@ -58,9 +58,17 @@ namespace QtEx
         Light
       };
 
+      enum PrimaryPalette
+      {
+        PrimaryDark,
+        Primary,
+        PrimaryLight
+      };
+
       explicit ThemeImpl(Qt::Object* parent = nullptr);
 
       [[nodiscard]] invokable QColor color(ThemePalette) const noexcept;
+      [[nodiscard]] invokable QColor pcolor(PrimaryPalette) const noexcept;
 
       friend class Theme;
 
@@ -72,13 +80,14 @@ namespace QtEx
 
     private:
       ThemeMode m_dark_mode;
-      map <ThemePalette, Qt::Color> m_dict_light;
-      map <ThemePalette, Qt::Color> m_dict_dark;
+      map<ThemePalette, Qt::Color> m_dict_light;
+      map<ThemePalette, Qt::Color> m_dict_dark;
+      map<PrimaryPalette, ThemePalette> m_dict_primary;
       Qt::String m_folder;
       Qt::String m_name;
       Qt::String m_fallback;
 
-      map <Qt::String, ThemePalette> EnumerationDictionary;
+      map<Qt::String, ThemePalette> EnumerationDictionary;
   };
 } // QtEx
 Q_DECLARE_METATYPE(QtEx::ThemeImpl*)
@@ -131,8 +140,16 @@ namespace QtEx
         Light
       };
 
+      enum PrimaryPalette
+      {
+        PrimaryDark,
+        Primary,
+        PrimaryLight
+      };
+
       Q_ENUM(ThemePalette)
       Q_ENUM(ThemeMode)
+      Q_ENUM(PrimaryPalette)
 
       static auto get() -> Theme*;
       static auto create(QQmlEngine* qml_engine, QJSEngine* js_engine) -> Theme*;

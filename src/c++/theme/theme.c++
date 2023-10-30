@@ -54,11 +54,16 @@ namespace QtEx
       { "surface0", Surface0 },
       { "base", Base },
       { "mantle", Mantle },
-      { "crust", Crust },
+      { "crust", Crust }
     })
     , m_folder(QCoreApplication::applicationDirPath() + "/theme")
     , m_name("Catpuccin")
     , m_fallback(":/qtx/themes/catpuccin.json")
+    , m_dict_primary({
+      { PrimaryDark, Sapphire },
+      { Primary, Sky },
+      { PrimaryLight, Teal }
+    })
   {
     qRegisterMetaType<ThemeImpl*>("ThemeImpl*");
 
@@ -160,6 +165,8 @@ namespace QtEx
       return not (color.red() * 0.2126 + color.green() * 0.7152 + color.blue() * 0.0722 > 255 / 2);
     #endif
   }
+
+  QColor ThemeImpl::pcolor(ThemeImpl::PrimaryPalette x) const noexcept { return color(m_dict_primary.at(x)); }
 
   auto Theme::get() -> Theme* { static Theme instance; return &instance; }
   auto Theme::create(QQmlEngine* qml_engine, QJSEngine* js_engine) -> Theme* { return get(); }

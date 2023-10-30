@@ -24,7 +24,7 @@ Button {
     background: Rectangle {
         implicitWidth: 28
         implicitHeight: 28
-        border.color: Theme.io.color(Theme.Surface2)
+        border.color: Theme.io.color(Theme.Overlay0)
         border.width: 1
         radius: 4
         color: {
