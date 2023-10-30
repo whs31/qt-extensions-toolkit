@@ -40,6 +40,7 @@ namespace QtEx
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTooltip.qml"), uri, major, minor, "FluentTooltip");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxUIShadow.qml"), uri, major, minor, "FluentShadow");
     qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSlider.qml"), uri, major, minor, "FluentSlider");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxRangeSlider.qml"), uri, major, minor, "FluentRangeSlider");
 
     qmlRegisterUncreatableMetaObject(Fluent::staticMetaObject, uri, major, minor, "FluentIcons", "Access to enums & flags only");
   }
