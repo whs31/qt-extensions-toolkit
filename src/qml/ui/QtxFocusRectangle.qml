@@ -11,7 +11,7 @@ Item {
         width: control.width
         height: control.height
         anchors.centerIn: parent
-        color: "transparent"
+        color: "#00000000"
         border.width: 2
         radius: control.radius
         border.color: Theme.io.color(Theme.Text)

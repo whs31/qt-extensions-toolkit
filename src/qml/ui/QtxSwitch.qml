@@ -44,7 +44,7 @@ Button {
             width: background.width
             height: background.height
             radius: height / 2
-            FUIFocusRectangle {
+            FluentFocusRectangle {
                 visible: control.activeFocus
                 radius: parent.radius
             }
@@ -60,7 +60,8 @@ Button {
                 if(checked) return borderCheckColor
                 return borderNormalColor
             }
-            FUITTFIcon {
+
+            FluentTTFIcon {
                 width: parent.height
                 x: checked ? control_backgound.width - width : 0
                 scale: {
@@ -79,7 +80,7 @@ Button {
             }
         }
 
-        FUIText {
+        FluentText {
             id: btn_text
             text: control.text
             Layout.alignment: Qt.AlignVCenter

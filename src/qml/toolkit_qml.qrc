@@ -8,5 +8,8 @@
         <file>ui/QtxSwitch.qml</file>
         <file>ui/QtxTTFIcon.qml</file>
         <file>ui/QtxCheckbox.qml</file>
+        <file>ui/QtxSlider.qml</file>
+        <file>ui/QtxTooltip.qml</file>
+        <file>ui/QtxUIShadow.qml</file>
     </qresource>
 </RCC>

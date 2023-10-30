@@ -27,7 +27,7 @@ Button {
     id: control
     enabled: true
     onClicked: clickListener()
-    background: Item { FUIFocusRectangle { radius: 4; visible: control.activeFocus } }
+    background: Item { FluentFocusRectangle { radius: 4; visible: control.activeFocus } }
     horizontalPadding:0
     verticalPadding: 0
     padding: 0
@@ -65,7 +65,7 @@ Button {
             }
             Behavior on color { ColorAnimation{ duration: 83 } }
 
-            FUITTFIcon {
+            FluentTTFIcon {
                 anchors.centerIn: parent
                 iconSource: FluentIcons.CheckboxIndeterminate
                 iconSize: 14
@@ -73,7 +73,7 @@ Button {
                 color: Theme.io.color(Theme.Base)
             }
 
-            FUITTFIcon {
+            FluentTTFIcon {
                 anchors.centerIn: parent
                 iconSource: FluentIcons.AcceptMedium
                 iconSize: 14
@@ -81,7 +81,7 @@ Button {
                 color: Theme.io.color(Theme.Base)
             }
         }
-        FUIText {
+        FluentText {
             id: btn_text
             text: control.text
             Layout.alignment: Qt.AlignVCenter

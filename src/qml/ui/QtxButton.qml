@@ -31,12 +31,12 @@ Button {
             if(!enabled) return disableColor
             return hovered ? hoverColor : normalColor
         }
-        FUIFocusRectangle {
+        FluentFocusRectangle {
             visible: control.activeFocus
             radius:4
         }
     }
-    contentItem: FUIText {
+    contentItem: FluentText {
         text: control.text
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

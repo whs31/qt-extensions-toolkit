@@ -31,12 +31,15 @@ namespace QtEx
 
     qmlRegisterType(QUrl("qrc:/qtx/widgets/FileDialog.qml"), uri, major, minor, "QtxFileDialog");
     qmlRegisterType(QUrl("qrc:/qtx/utils/ThemeChanger.qml"), uri, major, minor, "QtxThemeChanger");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxText.qml"), uri, major, minor, "FUIText");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxFocusRectangle.qml"), uri, major, minor, "FUIFocusRectangle");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxButton.qml"), uri, major, minor, "FUIButton");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSwitch.qml"), uri, major, minor, "FUISwitch");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTTFIcon.qml"), uri, major, minor, "FUITTFIcon");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxCheckbox.qml"), uri, major, minor, "FUICheckbox");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxText.qml"), uri, major, minor, "FluentText");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxFocusRectangle.qml"), uri, major, minor, "FluentFocusRectangle");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxButton.qml"), uri, major, minor, "FluentButton");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSwitch.qml"), uri, major, minor, "FluentSwitch");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTTFIcon.qml"), uri, major, minor, "FluentTTFIcon");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxCheckbox.qml"), uri, major, minor, "FluentCheckbox");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTooltip.qml"), uri, major, minor, "FluentTooltip");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxUIShadow.qml"), uri, major, minor, "FluentShadow");
+    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSlider.qml"), uri, major, minor, "FluentSlider");
 
     qmlRegisterUncreatableMetaObject(Fluent::staticMetaObject, uri, major, minor, "FluentIcons", "Access to enums & flags only");
   }
