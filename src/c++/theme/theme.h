@@ -69,8 +69,8 @@ namespace QtEx
 
       explicit ThemeImpl(Qt::Object* parent = nullptr);
 
-      [[nodiscard]] invokable QColor color(ThemePalette) const noexcept;
-      [[nodiscard]] invokable QColor pcolor(PrimaryPalette) const noexcept;
+      [[nodiscard]] invokable QColor color(int) const noexcept;
+      [[nodiscard]] invokable QColor pcolor(int) const noexcept;
 
       friend class Theme;
 

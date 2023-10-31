@@ -67,13 +67,13 @@ namespace QtEx
     qRegisterMetaType<ThemeImpl*>("ThemeImpl*");
   }
 
-  QColor ThemeImpl::color(ThemeImpl::ThemePalette key) const noexcept
+  QColor ThemeImpl::color(int key) const noexcept
   {
     switch(m_dark_mode)
     {
-      case Light: return m_dict_light.at(key);
+      case Light: return m_dict_light.at(static_cast<ThemeImpl::ThemePalette>(key));
       case Dark: [[fallthrough]];
-      default: return m_dict_dark.at(key);
+      default: return m_dict_dark.at(static_cast<ThemeImpl::ThemePalette>(key));
     }
   }
 
@@ -154,7 +154,7 @@ namespace QtEx
     #endif
   }
 
-  QColor ThemeImpl::pcolor(ThemeImpl::PrimaryPalette x) const noexcept { return color(m_dict_primary.at(x)); }
+  QColor ThemeImpl::pcolor(int x) const noexcept { return color(m_dict_primary.at(static_cast<ThemeImpl::PrimaryPalette>(x))); }
 
   auto Theme::get() -> Theme* { static Theme instance; return &instance; }
   auto Theme::create(QQmlEngine* qml_engine, QJSEngine* js_engine) -> Theme* { return get(); }
