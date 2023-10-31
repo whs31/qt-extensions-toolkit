@@ -27,6 +27,7 @@ namespace QtEx
 {
   void Toolkit::registerTypes(const char* uri, int major, int minor) noexcept
   {
+    initResources();
     qmlRegisterModule(uri, major, minor);
     qmlRegisterType<FileDialogModel>(uri, major, minor, "QtxFileDialogModel");
     qmlRegisterType<CircularReveal>(uri, major, minor, "QtxCircularReveal");
@@ -35,7 +36,6 @@ namespace QtEx
 
     qmlRegisterType(QUrl("qrc:/qtx/widgets/FileDialog.qml"), uri, major, minor, "QtxFileDialog");
     qmlRegisterType(QUrl("qrc:/qtx/utils/ThemeChanger.qml"), uri, major, minor, "QtxThemeChanger");
-
     #if defined QTEXTENSIONS_TOOLKIT_FLUENT
     qmlRegisterType<Fluent::Rectangle>(uri, major, minor, "FluentRectangle");
 
