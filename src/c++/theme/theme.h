@@ -21,7 +21,7 @@ namespace QtEx
   {
     Q_OBJECT
 
-    constinit static const char* FALLBACK = ":/qtx/themes/catpuccin.json";
+    constexpr static const char* FALLBACK = ":/qtx/themes/catpuccin.json";
 
     public:
       enum ThemePalette

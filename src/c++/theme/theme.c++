@@ -79,7 +79,9 @@ namespace QtEx
 
   void ThemeImpl::emplace(const Qt::String& folder) noexcept
   {
-    llog(Debug) "Looking for" << FALLBACK;
+    const auto fallback_name = QUrl(FALLBACK).fileName();
+    const auto target = String("%1/%2").arg(folder, fallback_name);
+    llog(Debug) "Looking for" << fallback_name;
     Directory directory(folder);
     if(not directory.exists())
     {
