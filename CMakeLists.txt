@@ -27,6 +27,8 @@ if(NOT TARGET QtExtensions)
     message(FATAL_ERROR "[Qt Extensions Toolkit] No Qt Extensions library found.")
 endif()
 
+option(QTEXTENSIONS_TOOLKIT_FLUENT "Enable Fluent UI elements" OFF)
+
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 
@@ -96,4 +98,11 @@ target_link_libraries(${PROJECT_NAME}
     QtExtensions
 )
 
+if(QTEXTENSIONS_TOOLKIT_FLUENT)
+    message(STATUS "[Qt Extensions Toolkit] Enabling Fluent UI Beta elements.")
+    target_compile_definitions(${PROJECT_NAME} PUBLIC QTEXTENSIONS_TOOLKIT_FLUENT)
+endif()
+
 target_include_directories(${PROJECT_NAME} PUBLIC include src/c++)
+
+unset(QTEXTENSIONS_TOOLKIT_FLUENT CACHE)
