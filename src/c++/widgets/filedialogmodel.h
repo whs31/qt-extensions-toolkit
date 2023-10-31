@@ -20,6 +20,7 @@ namespace QtEx
   {
     Q_OBJECT
     Q_PROPERTY(QString path READ path WRITE setPath NOTIFY pathChanged FINAL)
+    Q_PROPERTY(QString mask READ mask WRITE setMask NOTIFY maskChanged FINAL)
 
     public:
       enum Roles
@@ -56,6 +57,9 @@ namespace QtEx
 
     signals:
       void pathChanged();
+      void sortFlagsChanged();
+      void filtersChanged();
+      void maskChanged();
 
     protected:
       [[nodiscard]] QHash<int, QByteArray> roleNames() const override;

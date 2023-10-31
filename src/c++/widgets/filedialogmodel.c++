@@ -88,12 +88,14 @@ namespace QtEx
   Qt::Directory::SortFlags FileDialogModel::sortFlags() const { return m_sort_flags; }
   void FileDialogModel::setSortFlags(Qt::Directory::SortFlags x) {
     m_sort_flags = x;
+    emit sortFlagsChanged();
     this->scan();
   }
 
   Qt::Directory::Filters FileDialogModel::filters() const { return m_filters; }
   void FileDialogModel::setFilters(Qt::Directory::Filters x) {
     m_filters = x;
+    emit filtesChanged();
     this->scan();
   }
 
@@ -120,6 +122,7 @@ namespace QtEx
   Qt::String FileDialogModel::mask() const { return m_mask; }
   void FileDialogModel::setMask(const Qt::String x) {
     m_mask = x;
+    emit maskChanged();
     this->scan();
   }
 } // QtEx
