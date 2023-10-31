@@ -95,7 +95,7 @@ namespace QtEx
   Qt::Directory::Filters FileDialogModel::filters() const { return m_filters; }
   void FileDialogModel::setFilters(Qt::Directory::Filters x) {
     m_filters = x;
-    emit filtesChanged();
+    emit filtersChanged();
     this->scan();
   }
 
