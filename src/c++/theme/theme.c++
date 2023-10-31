@@ -155,6 +155,7 @@ namespace QtEx
     emit nameChanged();
     io()->load(folder(), name());
     emit ioChanged();
+    m_config->set("name", Qt::Variant::fromValue(name()), StaticConfig::SetMode::WriteToFile);
   }
 
   Qt::String Theme::folder() const { return io()->m_folder; }
@@ -165,6 +166,7 @@ namespace QtEx
     ThemeImpl::emplace(folder());
     io()->load(folder(), name());
     emit ioChanged();
+    m_config->set("folder", Qt::Variant::fromValue(folder()), StaticConfig::SetMode::WriteToFile);
   }
 
   int Theme::darkMode() const { return static_cast<int>(io()->m_dark_mode); }
@@ -175,6 +177,7 @@ namespace QtEx
     io()->m_dark_mode = static_cast<ThemeImpl::ThemeMode>(static_cast<ThemeMode>(x));
     emit darkModeChanged();
     emit ioChanged();
+    m_config->set("dark", Qt::Variant::fromValue(static_cast<bool>(darkMode() == Dark)), StaticConfig::SetMode::WriteToFile);
   }
 
   ThemeImpl* Theme::io() const { return m_io; }
