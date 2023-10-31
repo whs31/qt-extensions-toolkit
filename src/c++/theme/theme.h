@@ -21,6 +21,8 @@ namespace QtEx
   {
     Q_OBJECT
 
+    constinit static const char* FALLBACK = ":/qtx/themes/catpuccin.json";
+
     public:
       enum ThemePalette
       {
@@ -73,7 +75,7 @@ namespace QtEx
       friend class Theme;
 
     private:
-      static void emplace(const Qt::String& folder, const Qt::String& fallback_path, const Qt::String& fallback_name) noexcept;
+      static void emplace(const Qt::String& folder) noexcept;
       static auto isSystemInDarkMode() noexcept -> bool;
 
       void load(const Qt::String& folder, const Qt::String& name) noexcept;
@@ -85,7 +87,6 @@ namespace QtEx
       map<PrimaryPalette, ThemePalette> m_dict_primary;
       Qt::String m_folder;
       Qt::String m_name;
-      Qt::String m_fallback;
 
       map<Qt::String, ThemePalette> EnumerationDictionary;
   };
@@ -99,7 +100,6 @@ namespace QtEx
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
     Q_PROPERTY(QString folder READ folder WRITE setFolder NOTIFY folderChanged FINAL)
-    Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged FINAL)
     Q_PROPERTY(int darkMode READ darkMode WRITE setDarkMode NOTIFY darkModeChanged FINAL)
     Q_PROPERTY(ThemeImpl* io READ io NOTIFY ioChanged FINAL)
 
@@ -161,14 +161,12 @@ namespace QtEx
 
       [[nodiscard]] Qt::String name() const;      void setName(const Qt::String&);
       [[nodiscard]] Qt::String folder() const;    void setFolder(const Qt::String&);
-      [[nodiscard]] Qt::String fallback() const;  void setFallback(const Qt::String&);
       [[nodiscard]] int darkMode() const;         void setDarkMode(int);
       [[nodiscard]] ThemeImpl* io() const;
 
     signals:
       void nameChanged();
       void folderChanged();
-      void fallbackChanged();
       void darkModeChanged();
       void ioChanged();
 
