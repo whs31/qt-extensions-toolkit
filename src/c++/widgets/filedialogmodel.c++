@@ -101,7 +101,7 @@ namespace QtEx
 
   void FileDialogModel::scan() noexcept
   {
-    m_storage.clear();
+    this->clear();
     Directory dir(path(), mask(), sortFlags(), filters());
     for(const FileInfo& item : dir.entryInfoList())
     {
@@ -119,8 +119,15 @@ namespace QtEx
     }
   }
 
+  void FileDialogModel::clear() noexcept
+  {
+    beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
+    m_storage.clear();
+    endRemoveRows();
+  }
+
   Qt::String FileDialogModel::mask() const { return m_mask; }
-  void FileDialogModel::setMask(const Qt::String x) {
+  void FileDialogModel::setMask(const Qt::String& x) {
     m_mask = x;
     emit maskChanged();
     this->scan();

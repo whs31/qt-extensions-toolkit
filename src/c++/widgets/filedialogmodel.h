@@ -50,7 +50,7 @@ namespace QtEx
       [[nodiscard]] String path() const;                          void setPath(const String&);
       [[nodiscard]] Qt::Directory::SortFlags sortFlags() const;   void setSortFlags(Qt::Directory::SortFlags);
       [[nodiscard]] Qt::Directory::Filters filters() const;       void setFilters(Qt::Directory::Filters);
-      [[nodiscard]] Qt::String mask() const;                      void setMask(const Qt::String);
+      [[nodiscard]] Qt::String mask() const;                      void setMask(const Qt::String&);
 
       [[nodiscard]] int rowCount(const QModelIndex& = QModelIndex()) const override;
       [[nodiscard]] QVariant data(const QModelIndex& index, int role) const override;
@@ -64,6 +64,7 @@ namespace QtEx
     protected:
       [[nodiscard]] QHash<int, QByteArray> roleNames() const override;
       virtual void scan() noexcept;
+      void clear() noexcept;
 
       static auto parseSize(u64 size) -> String;
 

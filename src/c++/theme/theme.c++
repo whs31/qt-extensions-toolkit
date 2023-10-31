@@ -9,6 +9,7 @@
 #include <QtCore/QJsonObject>
 #include <QtGui/QGuiApplication>
 #include <QtExtensions/Logging>
+#include <QtExtensions/Utility>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
 #include <QtGui/QStyleHints>
@@ -79,20 +80,8 @@ namespace QtEx
 
   void ThemeImpl::emplace(const Qt::String& folder) noexcept
   {
-    llog(Debug) "Looking for" << FALLBACK;
-    Directory directory(folder);
-    if(not directory.exists())
-    {
-      directory.mkpath(folder);
-      llog(Debug) "Created directory" << folder;
-    }
-
-    File file(target);
-    if(not file.exists())
-    {
-      File::copy(FALLBACK, target);
-      llog(Debug) "Placed fallback file into folder";
-    }
+    Utility::emplaceFile(String("%1/%2").arg(folder, QUrl(FALLBACK).fileName()), FALLBACK, Utility::EmplaceMode::OnlyIfMissing);
+    llog(Debug) "Placed fallback file into folder";
   }
 
   void ThemeImpl::load(const String& folder, const String& name) noexcept
@@ -166,6 +155,7 @@ namespace QtEx
     emit nameChanged();
     io()->load(folder(), name());
     emit ioChanged();
+    m_config->set("name", Qt::Variant::fromValue(name()), StaticConfig::SetMode::WriteToFile);
   }
 
   Qt::String Theme::folder() const { return io()->m_folder; }
@@ -176,6 +166,7 @@ namespace QtEx
     ThemeImpl::emplace(folder());
     io()->load(folder(), name());
     emit ioChanged();
+    m_config->set("folder", Qt::Variant::fromValue(folder()), StaticConfig::SetMode::WriteToFile);
   }
 
   int Theme::darkMode() const { return static_cast<int>(io()->m_dark_mode); }
@@ -186,6 +177,7 @@ namespace QtEx
     io()->m_dark_mode = static_cast<ThemeImpl::ThemeMode>(static_cast<ThemeMode>(x));
     emit darkModeChanged();
     emit ioChanged();
+    m_config->set("dark", Qt::Variant::fromValue(static_cast<bool>(darkMode() == Dark)), StaticConfig::SetMode::WriteToFile);
   }
 
   ThemeImpl* Theme::io() const { return m_io; }
