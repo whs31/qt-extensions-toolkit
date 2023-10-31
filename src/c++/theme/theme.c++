@@ -9,6 +9,7 @@
 #include <QtCore/QJsonObject>
 #include <QtGui/QGuiApplication>
 #include <QtExtensions/Logging>
+#include <QtExtensions/Utility>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
 #include <QtGui/QStyleHints>
@@ -79,22 +80,8 @@ namespace QtEx
 
   void ThemeImpl::emplace(const Qt::String& folder) noexcept
   {
-    const auto fallback_name = QUrl(FALLBACK).fileName();
-    const auto target = String("%1/%2").arg(folder, fallback_name);
-    llog(Debug) "Looking for" << fallback_name;
-    Directory directory(folder);
-    if(not directory.exists())
-    {
-      directory.mkpath(folder);
-      llog(Debug) "Created directory" << folder;
-    }
-
-    File file(target);
-    if(not file.exists())
-    {
-      File::copy(FALLBACK, target);
-      llog(Debug) "Placed fallback file into folder";
-    }
+    Utility::emplaceFile(String("%1/%2").arg(folder, QUrl(FALLBACK).fileName()), FALLBACK, Utility::EmplaceMode::OnlyIfMissing);
+    llog(Debug) "Placed fallback file into folder";
   }
 
   void ThemeImpl::load(const String& folder, const String& name) noexcept
