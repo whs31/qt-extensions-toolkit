@@ -60,7 +60,7 @@ Popup {
         ListView {
             id: __view
             anchors.fill: parent
-            model: QtxFileDialogModel { id: __model }
+            model: XFileDialogModel { id: __model }
             ScrollBar.vertical: ScrollBar { active: true; policy: ScrollBar.AlwaysOn }
             boundsBehavior: Flickable.StopAtBounds
             delegate: ItemDelegate {

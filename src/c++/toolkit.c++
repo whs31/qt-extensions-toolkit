@@ -29,28 +29,16 @@ namespace QtEx
   {
     initResources();
     qmlRegisterModule(uri, major, minor);
-    qmlRegisterType<FileDialogModel>(uri, major, minor, "QtxFileDialogModel");
-    qmlRegisterType<CircularReveal>(uri, major, minor, "QtxCircularReveal");
-    qmlRegisterSingletonType<QuickGlobalPointerHolder>(uri, major, minor, "QtxGlobal", QuickGlobalPointerHolder::create);
+    qmlRegisterType<FileDialogModel>(uri, major, minor, "XFileDialogModel");
+    qmlRegisterType<CircularReveal>(uri, major, minor, "XCircularReveal");
+    qmlRegisterSingletonType<QuickGlobalPointerHolder>(uri, major, minor, "XGlobal", QuickGlobalPointerHolder::create);
     qmlRegisterSingletonType<Theme>(uri, major, minor, "Theme", Theme::create);
 
-    qmlRegisterType(QUrl("qrc:/qtx/widgets/FileDialog.qml"), uri, major, minor, "QtxFileDialog");
-    qmlRegisterType(QUrl("qrc:/qtx/utils/ThemeChanger.qml"), uri, major, minor, "QtxThemeChanger");
-    #if defined QTEXTENSIONS_TOOLKIT_FLUENT
-    qmlRegisterType<Fluent::Rectangle>(uri, major, minor, "FluentRectangle");
+    qmlRegisterType(QUrl("qrc:/qtx/widgets/FileDialog.qml"), uri, major, minor, "XFileDialog");
+    qmlRegisterType(QUrl("qrc:/qtx/utils/ThemeChanger.qml"), uri, major, minor, "XThemeChanger");
 
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxText.qml"), uri, major, minor, "FluentText");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxFocusRectangle.qml"), uri, major, minor, "FluentFocusRectangle");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxButton.qml"), uri, major, minor, "FluentButton");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSwitch.qml"), uri, major, minor, "FluentSwitch");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTTFIcon.qml"), uri, major, minor, "FluentTTFIcon");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxCheckbox.qml"), uri, major, minor, "FluentCheckbox");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxTooltip.qml"), uri, major, minor, "FluentTooltip");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxUIShadow.qml"), uri, major, minor, "FluentShadow");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxClip.qml"), uri, major, minor, "FluentClip");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxSlider.qml"), uri, major, minor, "FluentSlider");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxRangeSlider.qml"), uri, major, minor, "FluentRangeSlider");
-    qmlRegisterType(QUrl("qrc:/qtx/ui/QtxProgressBar.qml"), uri, major, minor, "FluentProgressBar");
+    #if defined QTEXTENSIONS_TOOLKIT_FLUENT
+    qmlRegisterType<Fluent::Rectangle>(uri, major, minor, "FluentRectangle");]\
 
     qmlRegisterUncreatableMetaObject(Fluent::staticMetaObject, uri, major, minor, "FluentIcons", "Access to enums & flags only");
     #endif

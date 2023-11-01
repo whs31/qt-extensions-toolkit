@@ -2,17 +2,5 @@
     <qresource prefix="qtx/">
         <file>widgets/FileDialog.qml</file>
         <file>utils/ThemeChanger.qml</file>
-        <file>ui/QtxText.qml</file>
-        <file>ui/QtxButton.qml</file>
-        <file>ui/QtxFocusRectangle.qml</file>
-        <file>ui/QtxSwitch.qml</file>
-        <file>ui/QtxTTFIcon.qml</file>
-        <file>ui/QtxCheckbox.qml</file>
-        <file>ui/QtxSlider.qml</file>
-        <file>ui/QtxRangeSlider.qml</file>
-        <file>ui/QtxTooltip.qml</file>
-        <file>ui/QtxUIShadow.qml</file>
-        <file>ui/QtxClip.qml</file>
-        <file>ui/QtxProgressBar.qml</file>
     </qresource>
 </RCC>
