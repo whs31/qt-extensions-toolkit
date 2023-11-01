@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls.Universal 2.15
 
-import QtExtensions.Toolkit
+import QtExtensions.Toolkit 1.0
 
 import "qrc:/qtx/FileExtensions.js" as FileExtensions
 

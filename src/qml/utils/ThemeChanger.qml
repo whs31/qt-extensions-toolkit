@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtExtensions.Toolkit
+import QtExtensions.Toolkit 1.0
 
 Loader {
     required property Item rootItem
